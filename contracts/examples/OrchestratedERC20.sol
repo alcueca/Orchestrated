@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 pragma solidity ^0.7.0;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "../OrchestratedV1.sol";
+import "../Orchestrated.sol";
 import "./IMintableERC20.sol";
 
 
-contract OrchestratedV1ERC20 is IMintableERC20, OrchestratedV1, ERC20 {
+contract OrchestratedERC20 is IMintableERC20, Orchestrated, ERC20 {
 
     /**
      * @dev Calls the constructors of OrchestratedV1 and ERC20(name, symbol)
      */
     constructor (string memory name, string memory symbol)
-        OrchestratedV1()
+        Orchestrated()
         ERC20(name, symbol)
     { }
 
@@ -27,7 +27,7 @@ contract OrchestratedV1ERC20 is IMintableERC20, OrchestratedV1, ERC20 {
      */
     function mint(address account, uint256 amount)
         public override
-        onlyOrchestrated("OrchestratedV1ERC20: mint")
+        onlyOrchestrated("OrchestratedERC20: mint")
     {
         _mint(account, amount);
     }

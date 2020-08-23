@@ -1,4 +1,4 @@
-const ERC20 = artifacts.require('OrchestratedV2ERC20')
+const ERC20 = artifacts.require('OrchestratedERC20')
 const Minter = artifacts.require('Minter')
 
 // @ts-ignore
@@ -6,7 +6,7 @@ import { expectRevert } from '@openzeppelin/test-helpers'
 import { keccak256, toUtf8Bytes } from 'ethers/lib/utils'
 import { assert } from 'chai'
 
-contract('OrchestratedV2', async (accounts: string[]) => {
+contract('Orchestrated', async (accounts: string[]) => {
   let [owner, user] = accounts
 
   let erc20: any
@@ -20,7 +20,7 @@ contract('OrchestratedV2', async (accounts: string[]) => {
   it('does not allow minting to unknown addresses', async () => {
     await expectRevert(
         minter.mint(erc20.address, owner, 1, { from: owner }),
-        'OrchestratedV2ERC20: mint'
+        'OrchestratedERC20: mint'
       )
   })
 
@@ -36,7 +36,7 @@ contract('OrchestratedV2', async (accounts: string[]) => {
     await erc20.orchestrate(minter.address, burnSignature, { from: owner })
     await expectRevert(
         minter.mint(erc20.address, owner, 1, { from: owner }),
-        'OrchestratedV2ERC20: mint'
+        'OrchestratedERC20: mint'
       )
   })
 })

@@ -1,8 +1,7 @@
-// const SimpleStorage = artifacts.require('./SimpleStorage.sol');
-// const UpgradableStorage = artifacts.require('./UpgradableStorage.sol');
+const OrchestratedERC20 = artifacts.require('OrchestratedERC20.sol');
+const Minter = artifacts.require('Minter.sol');
 
 module.exports = async (deployer, network, accounts) => {
-    // await deployer.deploy(SimpleStorage);
-    // await deployer.ens.setAddress('simplestorage.eth', SimpleStorage.address, { from: accounts[0] })
-    // await deployer.deploy(UpgradableStorage);
+    await deployer.deploy(OrchestratedERC20, "Name", "Symbol");
+    await deployer.deploy(Minter);
 }

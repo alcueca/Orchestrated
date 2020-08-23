@@ -11,7 +11,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  * Once deployment is completed, `owner` should call `transferOwnership(address(0))` to avoid any more contracts ever gaining privileged access.
  */
 
-contract OrchestratedV2 is Ownable {
+contract Orchestrated is Ownable {
     event GrantedAccess(address access);
 
     mapping(address => mapping (bytes4 => bool)) public orchestration;
