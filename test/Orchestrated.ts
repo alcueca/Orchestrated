@@ -25,14 +25,14 @@ contract('Orchestrated', async (accounts: string[]) => {
   })
 
   it('allows minting to orchestrated addresses for specified function', async () => {
-    const mintSignature = keccak256(toUtf8Bytes('mint(address,uint256)')).slice(0,16)
+    const mintSignature = keccak256(toUtf8Bytes('mint(address,uint256)')).slice(0,10) // 0x + 2 * 4 bytes
     await erc20.orchestrate(minter.address, mintSignature, { from: owner })
     await minter.mint(erc20.address, owner, 1, { from: owner })
     assert.equal(await erc20.balanceOf(owner), 1)
   })
 
   it('does not allow minting if given different permission', async () => {
-    const burnSignature = keccak256(toUtf8Bytes('burn(address,uint256)')).slice(0,16)
+    const burnSignature = keccak256(toUtf8Bytes('burn(address,uint256)')).slice(0,10)
     await erc20.orchestrate(minter.address, burnSignature, { from: owner })
     await expectRevert(
         minter.mint(erc20.address, owner, 1, { from: owner }),
