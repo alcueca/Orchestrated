@@ -3,6 +3,9 @@
 # documentation
 docs/
 
+# cache
+cache/
+
 # truffle build directory
 build/
 
